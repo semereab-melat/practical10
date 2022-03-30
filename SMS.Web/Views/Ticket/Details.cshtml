@@ -1,0 +1,21 @@
+@model Ticket
+
+<!-- Breadcrumbs using partial view -->
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/ticket", "Tickets"), ("","Close") })>
+    
+<div class="col card rounded shadow-lg p-4">
+
+    <h3 class="mb-4">Ticket</h3>
+
+    <!-- TBC - use a dl to display the ticket details -->
+
+    <div class="mt-4">           
+       
+        <!-- TBC - add a button to toggle the close ticket modal (_CloseModal.cshtml) -->
+
+        <a class="btn btn-link" asp-action="Index">Cancel</a>
+    </div>
+
+</div> 
+
+<partial name="_CloseModal"/>

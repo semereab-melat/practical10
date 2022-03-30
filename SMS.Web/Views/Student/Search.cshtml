@@ -1,0 +1,11 @@
+﻿@model TicketSearchViewModel
+
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/ticket", "Tickets"), ("","Search") })>
+<h3>Search Tickets</h3>
+
+<div class="my-4 d-flex flex-row justify-content-between align-items-center">  
+   <a asp-action="Create" class="btn btn-primary btn-sm">Create Ticket</a>   
+   <partial name="_Search" /> <!-- add form to search ticket issues -->
+</div>
+
+<!-- Copy Table from Index and amend as necessary -->
