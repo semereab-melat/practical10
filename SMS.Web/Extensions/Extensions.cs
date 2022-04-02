@@ -10,7 +10,8 @@ namespace SMS.Web
     {   
         // AddCookieAuthentication extension method - to be called in Startup service configuration
         public static void AddCookieAuthentication(this IServiceCollection services, 
-            string notAuthorised = "/User/ErrorNotAuthorised", string notAuthenticated= "/User/ErrorNotAuthenticated")
+            string notAuthorised = "/User/ErrorNotAuthorised",
+            string notAuthenticated= "/User/ErrorNotAuthenticated")
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options => {

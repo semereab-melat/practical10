@@ -3,3 +3,25 @@
 <!-- TBC Add a modal dialog (copy the _DeleteModal from Student views and change the modal id to "CloseTicketModal") -->
 <!-- The modal should contain a single text area where you can add the Resolution field -->
 <!-- Ensure that in the Details view the button that toggles the modal is configured to use the modal id "CloseTicketModal" -->
+
+
+<!-- Close Ticket Modal -->
+<div id="closeTicketModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+             <form asp-action="Close" type="post">
+               <div class="modal-header">
+                 <h5 class="modal-title">Close Ticket</h5>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" asp-for="Id" />
+                <textarea rows="5" asp-for="Resolution" class="form-control"></textarea>
+            </div>
+            <div class="modal-footer">                          
+                    <input type="submit" value="Confirm" class="btn btn-danger" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

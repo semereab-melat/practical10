@@ -1,18 +1,19 @@
 using SMS.Data.Repository;
 using SMS.Data.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using SMS.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-       .AddCookie(options => {
-            options.AccessDeniedPath = "/User/ErrorNotAuthorised";
-            options.LoginPath = "/User/ErrorNotAuthenticated";
-        });
+//Add Authontiction service using Cookie Scheme
+builder.Services.AddCookieAuthentication();
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//configuring Dependency Injection
+builder.Services.AddScoped<IStudentService, StudentServiceDb>();
 
 var app = builder.Build();
 

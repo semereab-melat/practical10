@@ -51,7 +51,7 @@ namespace SMS.Web.Controllers
         }
         
         [HttpPost] [ValidateAntiForgeryToken]
-        public IActionResult Register([Bind("Name,Email,Password,Role")]UserRegisterViewModel m)
+        public IActionResult Register(UserRegisterViewModel m)
         {
             // check if email address is already in use - replaced by use of remote validator in UserRegisterViewModel
             if (_svc.GetUserByEmail(m.Email) != null) {

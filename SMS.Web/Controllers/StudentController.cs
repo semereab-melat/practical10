@@ -13,9 +13,14 @@ namespace SMS.Web.Controllers
     {
         private IStudentService svc;
 
-        public StudentController()
+        // public StudentController()
+        // {
+        //     svc = new StudentServiceDb();
+        // }
+        //dependency injection
+        public StudentController(IStudentService ss)
         {
-            svc = new StudentServiceDb();
+            svc = ss;
         }
 
         // GET /student

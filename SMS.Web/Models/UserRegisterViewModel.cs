@@ -11,6 +11,7 @@ namespace SMS.Web.Models
 
         [Required]
         [EmailAddress]
+        //the name of method (VerifyEmailAddress), controller(User)
         [Remote("VerifyEmailAddress", "User")]
         public string Email { get; set; }
  

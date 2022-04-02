@@ -146,7 +146,7 @@ namespace SMS.Data.Services
                      .FirstOrDefault(t => t.Id == id);
         }
 
-        public Ticket CloseTicket(int id) // TBC - add resolution paremeter)
+        public Ticket CloseTicket(int id, string resolution) // TBC - add resolution paremeter)
         {
             var ticket = GetTicket(id);
             // if ticket does not exist or is already closed return null
@@ -155,7 +155,8 @@ namespace SMS.Data.Services
             // ticket exists and is active so close
             ticket.Active = false;
             // TBC - add Resolution and ResolvedOn (DateTime.Now)
-           
+            ticket.Resolution = resolution;
+            ticket.ResolvedOn = DateTime.Now; 
             db.SaveChanges(); // write to database
             return ticket;
         }
@@ -200,7 +201,20 @@ namespace SMS.Data.Services
             //       (t.Resolution.ToLowerCase().Contains(query.ToLowerCase()) || t.Student.Name.ToLowerCase().Contains(query.ToLowerCase))
             //     We can then && to this a query to check the range e.g.
             //      (range == TicketRange.OPEN && t.Active || range == TicketRange.CLOSED && !t.Active || range == TicketRange.ALL)
-            return  null;  
+
+            //this makes sure the query can be empty or query == query 
+            query = query == null ? "" : query;
+            var q = query.ToLower();
+            return  db.Tickets
+                       .Include(t => t.Student)
+                       .Where(t => (
+                           t.Issue.ToLower().Contains(q) || t.Student.Name.ToLower().Contains(q)) &&
+                        (range == TicketRange.OPEN && t.Active ||
+                        range == TicketRange.CLOSED && !t.Active ||
+                        range == TicketRange.ALL
+                        )
+                        ).ToList();
+
         }
 
         // ========================= Module Management ========================

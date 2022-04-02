@@ -37,7 +37,7 @@ namespace SMS.Data.Services
             var t5 = svc.CreateTicket(s3.Id, "No internet connection");
            
             // close homers first ticket 
-            svc.CloseTicket(t1.Id);
+            svc.CloseTicket(t1.Id, "Resolved" );
 
             // Homer is taking programming
             svc.AddStudentToModule(s1.Id, m1.Id, 60);

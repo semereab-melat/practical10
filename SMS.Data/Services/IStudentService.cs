@@ -24,7 +24,7 @@ namespace SMS.Data.Services
         // ---------------- Ticket Management ---------------
         Ticket CreateTicket(int studentId, string issue);
         Ticket GetTicket(int id);
-        Ticket CloseTicket(int id); //TBC - add string resolution parameter
+        Ticket CloseTicket(int id, string resolution); //TBC - add string resolution parameter
         bool   DeleteTicket(int id);
         IList<Ticket> GetAllTickets();
         IList<Ticket> GetOpenTickets();        

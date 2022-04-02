@@ -264,12 +264,30 @@ namespace SMS.Test
             var t = svc.CreateTicket(s.Id, "Dummy Ticket");
 
             // act
-            var r = svc.CloseTicket(t.Id);
+            var r = svc.CloseTicket(t.Id, "Resolved");
 
             // assert
             Assert.NotNull(r);              // verify closed ticket returned          
             Assert.False(r.Active);
+            Assert.Equal("Resolved", r.Resolution);
         }
+
+        [Fact]
+        public void Ticket_Search_WhenZeroTicketClosed_ShouldReturnZero()
+        {
+            // arrange
+            var s = svc.AddStudent("XXX", "xxx@email.com", "Computing", 20, 0, "http://photo.com");
+            var t1 = svc.CreateTicket(s.Id, "Dummy Ticket 1");
+            var t2 = svc.CreateTicket(s.Id, "Dummy Ticket 2");
+            var t3 = svc.CreateTicket(s.Id, "Dummy Ticket 3");
+
+            // act
+            var res = svc.SearchTickets(TicketRange.CLOSED, "dum");
+
+            // assert
+            Assert.Equal(0, res.Count);
+        }
+
 
         [Fact] 
         public void Ticket_CloseTicket_WhenAlreadyClosed_ShouldReturnNull()
@@ -279,8 +297,8 @@ namespace SMS.Test
             var t = svc.CreateTicket(s.Id, "Dummy Ticket");
 
             // act
-            var closed = svc.CloseTicket(t.Id);     // close active ticket    
-            closed = svc.CloseTicket(t.Id);         // close non active ticket
+            var closed = svc.CloseTicket(t.Id, "Resolved");     // close active ticket    
+            closed = svc.CloseTicket(t.Id, "Resolved");         // close non active ticket
 
             // assert
             Assert.Null(closed);                    // no ticket returned as already closed
